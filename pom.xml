@@ -1,0 +1,65 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>ru.kunik</groupId>
+  <artifactId>UCT</artifactId>
+  <version>1.0</version>
+  <packaging>jar</packaging>
+
+  <name>UCT</name>
+  <url>http://maven.apache.org</url>
+
+  <properties>
+      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  
+  <build>
+      <pluginManagement>
+          <plugins>
+              <plugin>
+                  <groupId>org.apache.maven.plugins</groupId>
+                  <artifactId>maven-jar-plugin</artifactId>
+                  <version>2.4</version>
+                  <executions>
+                      <execution>
+                          <id>Aroma</id>
+                          <goals>
+                              <goal>jar</goal>
+                          </goals>
+                          <configuration>
+                              <finalName>Aroma</finalName>
+                              <archive>
+                                  <manifest>
+                                      <mainClass>ru.kunik.uct.AromaStarter</mainClass>
+                                  </manifest>
+                              </archive>
+                          </configuration>
+                      </execution>
+                      <execution>
+                          <id>UCT</id>
+                          <goals>
+                              <goal>jar</goal>
+                          </goals>
+                          <configuration>
+                              <finalName>UCT</finalName>
+                              <archive>
+                                  <manifest>
+                                      <mainClass>ru.kunik.uct.UCT</mainClass>
+                                  </manifest>
+                              </archive>
+                          </configuration>
+                      </execution>
+                  </executions>
+              </plugin>
+          </plugins>
+      </pluginManagement>
+  </build>
+    <dependencies>
+        <dependency>
+            <groupId>org.yaml</groupId>
+            <artifactId>snakeyaml</artifactId>
+            <version>1.12</version>
+        </dependency>
+    </dependencies>
+</project>
