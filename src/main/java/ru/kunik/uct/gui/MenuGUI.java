@@ -59,7 +59,7 @@ public class MenuGUI extends JMenuBar implements IMenuGUI {
             public void actionPerformed(ActionEvent e) {
                 if (Dialogs.showQuestionDialog(main, "Вы уверены?", "Очистка лога") == 0) {
                     ((IMainGUI) main).getHandler().getLogger().clearLog();
-                    ((AromaGUI) main).setInfo("Лог очищен");
+                    ((IMainGUI) main).setInfo("Лог очищен");
                 }
             }
         });

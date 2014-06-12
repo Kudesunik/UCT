@@ -10,4 +10,5 @@ public interface IMainGUI{
     public InformationGUI getInformationGUI();
     public HelpGUI getHelpGUI();
     public IHandler getHandler();
+    public void setInfo(String str);
 }

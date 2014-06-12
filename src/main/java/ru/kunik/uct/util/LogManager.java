@@ -52,7 +52,11 @@ public class LogManager {
     }
     
     public void writeLog(String str) {
-        if (!((IMenuGUI)((IMainGUI) main).getMenuGUI()).isSaveApproved()) {
+        this.writeLog(str, true);
+    }
+    
+    public void writeLog(String str, boolean isSaveChecking) {
+        if (isSaveChecking && (!((IMenuGUI)((IMainGUI) main).getMenuGUI()).isSaveApproved())) {
             return;
         }
         try {

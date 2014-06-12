@@ -5,7 +5,7 @@ import ru.kunik.uct.gui.AromaGUI;
 
 public class AromaStarter {
     
-    private static IHandler handler = new AromaHandler();
+    private static final IHandler handler = new AromaHandler();
     
     public static void main(String[] args) {
         handler.initialize();

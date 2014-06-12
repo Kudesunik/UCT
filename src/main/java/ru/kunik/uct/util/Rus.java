@@ -116,7 +116,7 @@ public final class Rus {
         names.put("Horner", "Схема Горнера");
         names.put("Fractions", "Дроби");
         names.put("DiophantineEq", "Диофантовы уравнения");
-        names.put("CombiCalc", "Комбикалькулятор");
+        names.put("CombiCalc", "Комбокалькулятор");
         names.put("MagicSquare", "Магический квадрат");
         names.put("Exit", "Выход");
         names.put("Info", "Информация");

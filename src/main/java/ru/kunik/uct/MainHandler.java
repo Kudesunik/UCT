@@ -9,6 +9,8 @@ public class MainHandler implements IHandler {
     private final String workName;
     public LogManager log;
     
+    public static boolean isDebugging = false;
+    
     public MainHandler(String version, String workName) {
         this.version = version;
         this.workName = workName;

@@ -24,7 +24,7 @@ public class UCT extends MainGUI {
     private ActionListener buttonsActionListener;
     
     public UCT() {
-        super(new MainHandler("0.0.2", "Universal calculation tool"), 580, 100, false);
+        super(new MainHandler("0.6.5", "Universal calculation tool"), 580, 100, false);
     }
     
     public static void main(String[] args) {
@@ -62,20 +62,40 @@ public class UCT extends MainGUI {
                     FactorizationStarter.main(args);
                     setVisible(false);
                 }
+                if (e.getSource() == numerator) {
+                    NumeratorStarter.main(args);
+                    setVisible(false);
+                }
+                if (e.getSource() == combiCalc) {
+                    CombocalculatorStarter.main(args);
+                    setVisible(false);
+                }
+                if (e.getSource() == horner) {
+                    HornerStarter.main(args);
+                    setVisible(false);
+                }
+                if (e.getSource() == diophantineEq) {
+                    DiophantStarter.main(args);
+                    setVisible(false);
+                }
+                if (e.getSource() == fractions) {
+                    ContinuedFractionStarter.main(args);
+                    setVisible(false);
+                }
             }
         };
         aroma.addActionListener(buttonsActionListener);
         factorization.addActionListener(buttonsActionListener);
+        numerator.addActionListener(buttonsActionListener);
+        combiCalc.addActionListener(buttonsActionListener);
+        horner.addActionListener(buttonsActionListener);
+        diophantineEq.addActionListener(buttonsActionListener);
+        fractions.addActionListener(buttonsActionListener);
     }
     
     private void initializeGUI() {
         
         //Disable not programmed buttons
-        this.numerator.setEnabled(false);
-        this.horner.setEnabled(false);
-        this.fractions.setEnabled(false);
-        this.diophantineEq.setEnabled(false);
-        this.combiCalc.setEnabled(false);
         this.magicSquare.setEnabled(false);
         
         this.setLayout(new GridLayout(2, 1));

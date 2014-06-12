@@ -128,6 +128,7 @@ public class AromaGUI extends MainGUI {
         this.add(label);
     }
     
+    @Override
     public synchronized void setInfo(String str) {
         this.label.setText(str);
     }

@@ -72,6 +72,10 @@ public class MainGUI extends JFrame implements IMainGUI, Runnable {
     public HelpGUI getHelpGUI() {
         return (HelpGUI) this.help;
     }
+    
+    public void setInfo(String str) {
+        //Overrides by other
+    }
 
     public void run() {
         this.getInformationGUI().setVisible(true);
