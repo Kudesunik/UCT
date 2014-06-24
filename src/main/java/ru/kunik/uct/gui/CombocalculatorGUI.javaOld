@@ -17,7 +17,6 @@ import javax.swing.WindowConstants;
 import ru.kunik.uct.IHandler;
 import ru.kunik.uct.combocalculator.CombinatoricsCalculator;
 import ru.kunik.uct.combocalculator.FactorialCalculator;
-import ru.kunik.uct.combocalculator.GrassmanCalculator;
 import ru.kunik.uct.util.Filters;
 import ru.kunik.uct.util.Rus;
 
@@ -981,21 +980,11 @@ public class CombocalculatorGUI extends MainGUI {
                 if (e.getSource() == jButton1 && !grassmanJFrame.isVisible()) {
                     grassmanJFrame.setVisible(true);
                 }
-                if (e.getSource() == grassmanCalc1) {
-                    thread = new Thread(new GrassmanCalculator(instance(), new String[]{AField1.getText(), BField1.getText(), oAB1.getText(), pAB1.getText()}));
-                    thread.start();
-                }
-                if (e.getSource() == grassmanCalc2) {
-                    thread = new Thread(new GrassmanCalculator(instance(), new String[]{AField2.getText(), BField2.getText(), CField2.getText(), pAB2.getText(), pBC2.getText(), pCA2.getText(), pABC2.getText(), oABC2.getText()}));
-                    thread.start();
-                }
             }
         };
         factorialCalculate.addActionListener(buttonsActionListener);
         combiCalculate.addActionListener(buttonsActionListener);
         jButton1.addActionListener(buttonsActionListener);
-        grassmanCalc1.addActionListener(buttonsActionListener);
-        grassmanCalc2.addActionListener(buttonsActionListener);
     }
     
     @Override

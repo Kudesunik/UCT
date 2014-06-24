@@ -11,7 +11,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle;
 import javax.swing.SwingConstants;
-import javax.swing.WindowConstants;
 import ru.kunik.uct.IHandler;
 import ru.kunik.uct.diophant.DiophantCalculator;
 import ru.kunik.uct.util.Rus;
@@ -55,6 +54,12 @@ public class DiophantGUI extends MainGUI {
         this.handler = handler;
         this.initializeGUI();
         this.initializeListeners();
+        handler.getLogger().writeLog("====================================================");
+        handler.getLogger().writeLog("МАИ (НИУ) / Факультет № 3 / Кафедра № 308");
+        handler.getLogger().writeLog("Курсовая работа по дискретной математике Diophant");
+        handler.getLogger().writeLog("Группа: 3О - 113Б / Кузнецов Н.В. / Москва 2014");
+        handler.getLogger().writeLog("Программа Diophant запущена");
+        handler.getLogger().writeLog("====================================================");
     }
     
     private void initializeGUI() {

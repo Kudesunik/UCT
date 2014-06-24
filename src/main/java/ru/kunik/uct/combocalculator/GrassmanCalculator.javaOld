@@ -1,0 +1,8 @@
+package ru.kunik.uct.combocalculator;
+
+public class GrassmanCalculator implements Runnable {
+
+    public void run() {
+        
+    }
+}

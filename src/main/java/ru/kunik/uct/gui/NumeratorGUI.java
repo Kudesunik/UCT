@@ -43,10 +43,16 @@ public class NumeratorGUI extends MainGUI {
     private MouseListener labelsMouseListener;
     
     public NumeratorGUI(IHandler handler) {
-        super(handler, 382, 169);
+        super(handler, 445, 169);
         this.handler = handler;
         this.initializeGUI();
         this.initializeListeners();
+        handler.getLogger().writeLog("====================================================");
+        handler.getLogger().writeLog("МАИ (НИУ) / Факультет № 3 / Кафедра № 308");
+        handler.getLogger().writeLog("Курсовая работа по дискретной математике Numerator");
+        handler.getLogger().writeLog("Группа: 3О - 113Б / Кузнецов Н.В. / Москва 2014");
+        handler.getLogger().writeLog("Программа Numerator запущена");
+        handler.getLogger().writeLog("====================================================");
     }
     
     private void initializeGUI() {
@@ -120,9 +126,9 @@ public class NumeratorGUI extends MainGUI {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(clearButton, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(calculateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(clearButton, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(calculateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -219,8 +225,8 @@ public class NumeratorGUI extends MainGUI {
                         return;
                     }
                     if (!Filters.isInteger(inputField.getText())) {
-                        setInfo("Строка не является числом");
-                        handler.getLogger().writeLog("Строка не является числом");
+                        setInfo("Неверные входные данные");
+                        handler.getLogger().writeLog("Неверные входные данные");
                         return;
                     }
                     if (inputList.getModel().getSize() > 4) {

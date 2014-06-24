@@ -93,7 +93,7 @@ public class HelpGUI extends JFrame {
                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 174, Short.MAX_VALUE)
                 .addComponent(buttonExit, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE))
         );
-        textArea.setEditable(false);
+        textArea.setEditable(true);
         textArea.setColumns(20);
         textArea.setRows(5);
         jScrollPane1.setViewportView(textArea);

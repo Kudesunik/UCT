@@ -34,6 +34,7 @@ public class ContinuedFractionCalculator implements Runnable {
                     strAns.deleteCharAt(strAns.toString().length() - 1);
                     this.contFraction.setDirectAnswer(strAns.toString());
                     this.contFraction.setInfo("Вычислено");
+                    this.contFraction.getHandler().getLogger().writeLog("Для введенных данных: " + str + " Ответ:");
                     this.contFraction.getHandler().getLogger().writeLog(strAns.toString());
                 } else {
                     this.contFraction.setDirectAnswer("Ошибка в расчете");

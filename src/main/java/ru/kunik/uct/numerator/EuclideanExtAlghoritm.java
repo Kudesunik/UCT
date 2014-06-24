@@ -13,42 +13,57 @@ public class EuclideanExtAlghoritm implements Runnable {
         this.numerator = numerator;
         NumeratorHandler.numeratorList.clear();
         for (int i = 0; i < inputList.getModel().getSize(); i++) {
-            NumeratorHandler.numeratorList.add((Integer) inputList.getModel().getElementAt(i));
+            NumeratorHandler.numeratorList.add(((Integer)inputList.getModel().getElementAt(i)).longValue());
         }
     }
 
     public void run() {
-        this.numerator.setNodAnswer(gcdMulti(NumeratorHandler.numeratorList) + "");
-        this.numerator.setNokAnswer(lcmMulti(NumeratorHandler.numeratorList) + "");
+        long gcd = gcdMulti(NumeratorHandler.numeratorList);
+        long lcm = lcmMulti(NumeratorHandler.numeratorList);
+        this.numerator.setNodAnswer(gcd + "");
+        this.numerator.setNokAnswer(lcm + "");
+        this.numerator.setInfo("Вычислено");
+        StringBuilder sb = new StringBuilder();
+        sb.append("Для чисел: ");
+        for (long num : NumeratorHandler.numeratorList) {
+            sb.append(num);
+            sb.append(" ");
+        }
+        sb.append("НОД = ");
+        sb.append(gcd);
+        sb.append("; ");
+        sb.append("НОК = ");
+        sb.append(lcm);
+        this.numerator.getHandler().getLogger().writeLog(sb.toString());
     }
     
-    public static int[] gcdExt(int p, int q) {
-        if (q == 0) return new int[]{p, 1, 0};
-        if (p == 0) return new int[]{q, 0, 1};
-        int[] vals = gcdExt(q, p % q);
-        int d = vals[0];
-        int a = vals[2];
-        int b = vals[1] - (p / q) * vals[2];
-        return new int[]{d, a, b};
+    public static long[] gcdExt(long p, long q) {
+        if (q == 0) return new long[]{p, 1, 0};
+        if (p == 0) return new long[]{q, 0, 1};
+        long[] vals = gcdExt(q, p % q);
+        long d = vals[0];
+        long a = vals[2];
+        long b = vals[1] - (p / q) * vals[2];
+        return new long[]{d, a, b};
     }
     
-    public static int gcdMulti(List<Integer> lst) {
-        List<Integer> lstCopied = new ArrayList<Integer>();
+    public static long gcdMulti(List<Long> lst) {
+        List<Long> lstCopied = new ArrayList<Long>();
         lstCopied.addAll(lst);
-        int[] ans = new int[]{lstCopied.get(0), 0, 0};
+        long[] ans = new long[]{lstCopied.get(0), 0, 0};
         lstCopied.remove(0);
-        for (int i2 : lstCopied) {
+        for (long i2 : lstCopied) {
             ans = gcdExt(ans[0], i2);
         }
         return ans[0];
     }
     
-    public static int lcmMulti(List<Integer> lst) {
-        List<Integer> lstCopied = new ArrayList<Integer>();
+    public static long lcmMulti(List<Long> lst) {
+        List<Long> lstCopied = new ArrayList<Long>();
         lstCopied.addAll(lst);
-        int ans = lstCopied.get(0);
+        long ans = lstCopied.get(0);
         lstCopied.remove(0);
-        for (int i2 : lstCopied) {
+        for (long i2 : lstCopied) {
             ans = (Math.abs(ans) * Math.abs(i2)) / gcdExt(ans, i2)[0];
         }
         return ans;

@@ -34,20 +34,6 @@ public class CombinatoricsCalculator implements Runnable {
         
         int k = Integer.parseInt(kStr);
         
-        ans = calculateIncFactorial(n, k);
-        combo.setIncFactorialAnswer(ans + "");
-        combo.setInfo("Вычислено");
-        
-        if (k >= n) {
-            combo.setDecFactorialAnswer("k больше или равное n");
-            combo.setInfo("Число n должно быть больше n");
-        }
-        else {
-            ans = calculateDecFactorial(n, k);
-            combo.setDecFactorialAnswer(ans + "");
-            combo.setInfo("Вычислено");
-        }
-        
         if (k >= n) {
             combo.setPlacementAnswer("k больше или равное n");
             combo.setInfo("Число элементов в группе должно быть меньше общего числа элементов");
@@ -122,13 +108,5 @@ public class CombinatoricsCalculator implements Runnable {
             mid *= FactorialCalculator.calculateFactorial(permutationHash.get(set));
         }
         return (FactorialCalculator.calculateFactorial(n.length()) / mid);
-    }
-    
-    public long calculateIncFactorial(int n, int k) {
-        return FactorialCalculator.calculateFactorial(n + k - 1) / FactorialCalculator.calculateFactorial(n - 1);
-    }
-    
-    public long calculateDecFactorial(int n, int k) {
-        return FactorialCalculator.calculateFactorial(n)/FactorialCalculator.calculateFactorial(n - k);
     }
 }

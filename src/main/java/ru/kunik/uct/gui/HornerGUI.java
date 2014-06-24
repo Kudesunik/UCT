@@ -48,6 +48,12 @@ public class HornerGUI extends MainGUI {
         this.handler = handler;
         this.initializeGUI();
         this.initializeListeners();
+        handler.getLogger().writeLog("====================================================");
+        handler.getLogger().writeLog("МАИ (НИУ) / Факультет № 3 / Кафедра № 308");
+        handler.getLogger().writeLog("Курсовая работа по дискретной математике Horner");
+        handler.getLogger().writeLog("Группа: 3О - 113Б / Кузнецов Н.В. / Москва 2014");
+        handler.getLogger().writeLog("Программа Horner запущена");
+        handler.getLogger().writeLog("====================================================");
     }
     
     private void initializeGUI() {

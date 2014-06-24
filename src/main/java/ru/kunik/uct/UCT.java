@@ -24,7 +24,7 @@ public class UCT extends MainGUI {
     private ActionListener buttonsActionListener;
     
     public UCT() {
-        super(new MainHandler("0.6.5", "Universal calculation tool"), 580, 100, false);
+        super(new MainHandler("1.0.0", "Universal calculation tool"), 580, 100, false);
     }
     
     public static void main(String[] args) {
@@ -82,6 +82,10 @@ public class UCT extends MainGUI {
                     ContinuedFractionStarter.main(args);
                     setVisible(false);
                 }
+                if (e.getSource() == magicSquare) {
+                    MagicSquareStarter.main(args);
+                    setVisible(false);
+                }
             }
         };
         aroma.addActionListener(buttonsActionListener);
@@ -91,13 +95,10 @@ public class UCT extends MainGUI {
         horner.addActionListener(buttonsActionListener);
         diophantineEq.addActionListener(buttonsActionListener);
         fractions.addActionListener(buttonsActionListener);
+        magicSquare.addActionListener(buttonsActionListener);
     }
     
-    private void initializeGUI() {
-        
-        //Disable not programmed buttons
-        this.magicSquare.setEnabled(false);
-        
+    private void initializeGUI() {  
         this.setLayout(new GridLayout(2, 1));
         this.buttonPanel1.add(aroma);
         this.buttonPanel1.add(factorization);

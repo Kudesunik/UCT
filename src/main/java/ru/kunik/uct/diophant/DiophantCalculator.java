@@ -29,17 +29,17 @@ public class DiophantCalculator implements Runnable {
                 return;
             }
         }
-        int[] gcdExt = EuclideanExtAlghoritm.gcdExt(val[0], val[1]);
-        int ansX = (gcdExt[1] * val[2]) / gcdExt[0];
-        int ansY = (gcdExt[2] * val[2]) / gcdExt[0];
+        long[] gcdExt = EuclideanExtAlghoritm.gcdExt(val[0], val[1]);
+        int ansX = (int) ((gcdExt[1] * val[2]) / gcdExt[0]);
+        int ansY = (int) ((gcdExt[2] * val[2]) / gcdExt[0]);
         this.diophant.setXVariable(ansX + "");
         this.diophant.setYVariable(ansY + "");
         StringBuilder strX = new StringBuilder();
         StringBuilder strY = new StringBuilder();
         strX.append(ansX);
         strY.append(ansY);
-        int midX = val[1] / gcdExt[0];
-        int midY = -(val[0] / gcdExt[0]);
+        int midX = (int) (val[1] / gcdExt[0]);
+        int midY = (int) -(val[0] / gcdExt[0]);
         if (midX >= 0) {
             strX.append("+");
         }
@@ -50,6 +50,7 @@ public class DiophantCalculator implements Runnable {
         strY.append(midY);
         strX.append("k");
         strY.append("k");
+        
         this.diophant.setXMulti(strX.toString());
         this.diophant.setYMulti(strY.toString());
         this.diophant.setInfo("Вычислено");

@@ -49,6 +49,12 @@ public class AromaGUI extends MainGUI {
         
         this.initializeGUI();
         this.initializeListeners();
+        handler.getLogger().writeLog("====================================================");
+        handler.getLogger().writeLog("МАИ (НИУ) / Факультет № 3 / Кафедра № 308");
+        handler.getLogger().writeLog("Курсовая работа по дискретной математике Aroma");
+        handler.getLogger().writeLog("Группа: 3О - 113Б / Кузнецов Н.В. / Москва 2014");
+        handler.getLogger().writeLog("Программа Aroma запущена");
+        handler.getLogger().writeLog("====================================================");
     }
 
     private void initializeListeners() {

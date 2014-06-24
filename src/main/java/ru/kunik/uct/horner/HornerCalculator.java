@@ -2,7 +2,9 @@ package ru.kunik.uct.horner;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
+import org.apache.commons.lang.math.Fraction;
 import ru.kunik.uct.gui.HornerGUI;
 import ru.kunik.uct.util.Filters;
 
@@ -21,7 +23,7 @@ public class HornerCalculator implements Runnable {
         String replaced = str.replace(" ", "");
         String[] splited = replaced.split(",");
         for (String strSpl : splited) {
-            if (Filters.isInteger(strSpl)) {
+            if (Filters.isDouble(strSpl)) {
                 HornerHandler.hornerMultipliers.add(Double.parseDouble(strSpl));
             }
             else {
@@ -33,9 +35,13 @@ public class HornerCalculator implements Runnable {
         int total = HornerHandler.hornerMultipliers.size();
         StringBuilder strBuilder = new StringBuilder("<html>");
         Iterator iter = HornerHandler.hornerMultipliers.listIterator();
+        boolean flagFirst = true;
         while (iter.hasNext()) {
             total -= 1;
-            int i = ((Double) iter.next()).intValue();
+            double i = ((Double) iter.next()).doubleValue();
+            if (flagFirst && i < 0) {
+                strBuilder.append("-");
+            }
             if (i >= 0) {
                 strBuilder.append("+");
             }
@@ -48,8 +54,19 @@ public class HornerCalculator implements Runnable {
         strBuilder.append("</html>");
         this.horner.setEquation(strBuilder.deleteCharAt(6).toString());
         StringBuilder strAns = new StringBuilder();
-        for (double d : calculateHorner(HornerHandler.hornerMultipliers)) {
-            strAns.append(d);
+        HornerHandler.hornerAnswer.clear();
+        calculateHorner(HornerHandler.hornerMultipliers);
+        for (double d : HornerHandler.hornerAnswer) {
+            if (d != ((Double)d).intValue()) {
+                int numerator = Fraction.getFraction(d).getNumerator();
+                int denominator = Fraction.getFraction(d).getDenominator();
+                strAns.append(numerator);
+                strAns.append("/");
+                strAns.append(denominator);
+            }
+            else {
+                strAns.append(d);
+            }
             strAns.append(", ");
         }
         this.horner.setInfo("Вычислено");
@@ -57,6 +74,7 @@ public class HornerCalculator implements Runnable {
             strAns.deleteCharAt(strAns.toString().length() - 1);
             strAns.deleteCharAt(strAns.toString().length() - 1);
             this.horner.setAnswer(strAns.toString());
+            this.horner.getHandler().getLogger().writeLog("Для введенных коэффициентов уравнения: " + this.str + " корни:");
             this.horner.getHandler().getLogger().writeLog(strAns.toString());
         }
         else {
@@ -65,23 +83,32 @@ public class HornerCalculator implements Runnable {
         }
     }
     
-    public static List<Double> calculateHorner(List<Double> lst) {
-        List<Double> ans = new ArrayList<Double>();
+    public static void calculateHorner(List<Double> lst) {
+        List<Double> timedMult = new LinkedList<Double>();
         double start = lst.get(lst.size() - 1);
-        List<Double> hornerDividers = calculateRationalDividersArray(start);
+        List<Double> hornerDividers = calculateRationalDividersArray(start, lst.get(0));
         Iterator iterDiv = hornerDividers.listIterator();
         while (iterDiv.hasNext()) {
             double div = (Double) iterDiv.next();
-            Iterator iterMult = HornerHandler.hornerMultipliers.listIterator();
+            Iterator iterMult = lst.listIterator();
             double mult = ((Double) iterMult.next());
+            timedMult.clear();
             while (iterMult.hasNext()) {
+                timedMult.add(mult);
                 mult = (div * mult) + ((Double) iterMult.next());
             }
-            if (mult == 0.0D) ans.add(div);
+            if (mult == 0.0D) {
+                if (!HornerHandler.hornerAnswer.contains(div)) HornerHandler.hornerAnswer.add(div);
+                if (lst.size() == 3) addQuadraticRadixes(lst, HornerHandler.hornerAnswer);
+                if (timedMult.size() == 3) addQuadraticRadixes(timedMult, HornerHandler.hornerAnswer);
+                calculateHorner(timedMult);
+            }
         }
-        return ans;
     }
     
+    /**
+     * Old method
+     * 
     private static List<Double> calculateRationalDividersArray(double num) {
         List<Double> hornerDividers = new ArrayList<Double>();
         num = Math.abs(num);
@@ -102,5 +129,39 @@ public class HornerCalculator implements Runnable {
         }
         hornerDividers.addAll(timedList);
         return hornerDividers;
+    }
+    */
+    
+    private static List<Double> calculateIntegerDividersArray(double num) {
+        List<Double> hornerDividers = new ArrayList<Double>();
+        num = Math.abs(num);
+        for (double iter = (-num); iter <= num; iter++) {
+            if (num % iter == 0) hornerDividers.add(iter);
+        }
+        return hornerDividers;
+    }
+    
+    private static List<Double> calculateRationalDividersArray(double num, double den) {
+        List<Double> hornerDividers = new ArrayList<Double>();
+        double preAns;
+        for (double dNum : calculateIntegerDividersArray(num)) {
+            for (double dDen : calculateIntegerDividersArray(den)) {
+                preAns = dNum / dDen;
+                if (!hornerDividers.contains(preAns)) {
+                    hornerDividers.add(preAns);
+                }
+            }
+        }
+        return hornerDividers;
+    }
+    
+    public static void addQuadraticRadixes(List<Double> timedMult, List<Double> ans) {
+        double d = Math.pow(timedMult.get(1), 2) - 4 * timedMult.get(0) * timedMult.get(2);
+        if (d >= 0) {
+            double rd = (-timedMult.get(1) + Math.sqrt(d))/(2 * timedMult.get(0));
+            if (!ans.contains(rd)) ans.add(rd);
+            rd = (-timedMult.get(1) - Math.sqrt(d))/(2 * timedMult.get(0));
+            if (!ans.contains(rd)) ans.add(rd);
+        }
     }
 }
